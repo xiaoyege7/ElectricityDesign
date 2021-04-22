@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.xiaoye.springbootdemo03.dao.UserDao">  <!--指定mapper对应的dao,这样mapper就会实现dao对应的方法-->
+    <select id="queryUser" parameterType="xyz.xiaoye.springbootdemo03.entity.UserEntity" resultType="xyz.xiaoye.springbootdemo03.entity.UserEntity" >
+            select
+            Id ,user_unique,user_name,createTime
+            from tb_user
+            where user_unique=#{userUnique}
+    </select>
+    <insert id="createUser" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="Id" parameterType="xyz.xiaoye.springbootdemo03.entity.UserEntity">
+        INSERT INTO
+        tb_user(user_unique,user_name,
+                  createTime)
+        VALUES
+        (#{userUnique},#{userName},
+        #{createTime})
+    </insert>
+    <update id="updateUser" parameterType="xyz.xiaoye.springbootdemo03.entity.UserEntity">
+        UPDATE tb_user
+        <set>
+            <if test="userName != null">user_name=#{userName}</if>
+
+        </set>
+        WHERE user_unique=#{userUnique}
+    </update>
+    <delete id="deleteUser">
+        DELETE FROM
+        tb_user
+        WHERE
+        user_unique =
+        #{userUnique}
+    </delete>
+
+</mapper>

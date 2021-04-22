@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.xiaoye.springbootdemo03.dao.RoomDao">  <!--指定mapper对应的dao,这样mapper就会实现dao对应的方法-->
+    <select id="queryRoom" parameterType="xyz.xiaoye.springbootdemo03.entity.RoomEntity" resultType="xyz.xiaoye.springbootdemo03.entity.RoomEntity" >
+            select
+            Id ,room_unique,room_master,room_nickname
+            from tb_room
+            where room_unique=#{roomUnique}
+    </select>
+    <insert id="createRoom" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="Id" parameterType="xyz.xiaoye.springbootdemo03.entity.RoomEntity">
+        INSERT INTO
+        tb_room(room_unique,room_master,
+                  room_nickname)
+        VALUES
+        (#{roomUnique},#{roomMaster},
+        #{roomNickname})
+    </insert>
+
+
+</mapper>
